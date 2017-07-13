@@ -1,0 +1,16 @@
+.dropdown {
+  width: 100%;
+}
+
+.dropdown-toggle {
+  width: 100%;
+}
+
+.dropdown-menu {
+  width: 100%;
+}
+
+.container {
+    width: 1570px;
+    margin: 50px auto;
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/semantic.min.css"></link>
+  <link rel="stylesheet" type="text/css" href="assets\css\custom.css"></link>
+</head>
+<body>
+
+<div class="container">
+  <div class="ui grid">
+    <div class="four wide">
+      <div id="sector" class="ui selection dropdown">
+        <input type="hidden" name="gender">
+        <i class="dropdown icon"></i>
+        <div class="default text">Sector</div>
+        <div class="menu">
+          <div class="item" data-value="1">Valencia</div>
+          <div class="item" data-value="0">Zaragosa</div>
+        </div>
+      </div>
+    </div>
+    <div class="four wide">
+      <select id="especialidad" multiple="" class="ui fluid dropdown">
+        <option value="">Especialidad</option>
+        <option value="angular">Derecho Mercantil</option>
+        <option value="css">Derecho de la competencia</option>
+        <option value="design">Derecho societario</option>
+        <option value="ember">Derecho Igualitario</option>
+        <option value="html">Derecho de prueba</option>
+        <option value="ia">Internet</option>
+      </select>
+    </div>
+    <div class="four wide">
+      <div id="sede" class="ui selection dropdown">
+        <input type="hidden" name="gender">
+        <i class="dropdown icon"></i>
+        <div class="default text">Sede</div>
+        <div class="menu">
+          <div class="item" data-value="1">Somewhere</div>
+          <div class="item" data-value="0">Somewhere</div>
+        </div>
+      </div>
+    </div>
+    <div class="four wide">
+      <div class="ui input">
+  <input id="nombre" type="text" placeholder="Buscar por nombre">
+</div>
+    </div>
+    <div class="three wide">
+      <button id="buscar" class="ui button">
+        Buscar
+      </button>
+    </div>
+
+  </div>
+</div>
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/semantic.min.js"></script>
+<script type="text/javascript" src="assets\js\filter.js"></script>
+
+</html>
