@@ -1,16 +1,9 @@
 //Variáveis para armazenar os dados dos filtros
-var sectorFilter = '';
-var especialidadFilter = '';
-var nombre = '';
-var sede = '';
+var hasEspecialidad = 0;
+var $data;
 
 //Array de objects utilizado apenas para testes
-var data = [
-  {nombre : 'Carlos', sede : 'somewhere', especialidad : ['Derecho de prueba', 'Internet'], sector : 'Valencia'},
-  {nombre : 'João', sede : 'somewhere', especialidad : ['Derecho Igualitario'], sector : 'Valencia'},
-  {nombre : 'Maria', sede : 'somewhere', especialidad : ['Derecho societario', 'Derecho Mercantil'], sector : 'Zaragosa'},
-  {nombre : 'Carlos', sede : 'somewhere', especialidad : ['Derecho societario', 'Derecho Igualitario'], sector : 'Valencia'},
-];
+var filter = {'sector' : '', 'sede' : '', 'especialidad' : '', 'sector' : ''};
 
 //Inicializa os dropdowns
 $('#especialidad').dropdown();
@@ -22,10 +15,11 @@ $('#sector').dropdown();
 //Atribui os valores de entrada dos filtros às variáveis e faz a busca
 $(function() {
     document.getElementById('buscar').addEventListener('click', function() {
-        sectorFilter = $('#sector').val();
-        especialidadFilter = $('#especialidad').val();
-        nombreFilter = $('#nombre').val();
-        sedeFilter = $('#sede').val();
+        filter['sector'] = $('#sector').val();
+        filter['especialidad'] = $('#especialidad').val();
+        filter['nombre'] = $('#nombre').val();
+        filter['sede'] = $('#sede').val();
+        $data = $('.equipo-list-member');
         search();
     });
 });
@@ -35,29 +29,29 @@ $(function() {
     apresenta o nome no console
 */
 function search(){
-    for(i in data){
-        if(execFilter(data[i]))
-            console.log(data[i]['nombre']);
-  }
-}
-
-//Verifica a referência de todas as especialidades filtradas
-function verifyEspecialidad(arrayEspecialidad){
-    for(j in arrayEspecialidad)
-        if(especialidadFilter.indexOf(arrayEspecialidad[i]) < 0)
-            return 1;
-    return 0;
+    for(var i = 0; i < $data.length; i++){
+        var show = 1;
+        hasEspecialidad = 0;
+        for(var k = 1; k < $data[i].attributes.length; k++ ){
+            show *= execFilter($data[i].attributes[k].localName.replace(/[^A-Za-z]/g, ''), $data[i].attributes[k].nodeValue);
+        }
+        if(show){
+            console.log($data[i].attributes[$data[i].attributes.length - 1].nodeValue);
+            $data[i].hidden = false;
+        }
+        else{
+            $data[i].hidden = true;
+        }
+    }
 }
 
 //Testa aderência aos filtros
-function execFilter(row) {
-    if ((especialidadFilter != '') && verifyEspecialidad(row['especialidad']))
+function execFilter(index, value) {
+    if(index == 'especialidad' && hasEspecialidad == 1)
+        return 1;
+    if (filter[index] != '' && filter[index].toLowerCase() != value.toLowerCase())
         return 0;
-    if (sectorFilter != '' && sectorFilter != row['A_C_Operator_Manager__c'])
-        return 0;
-    if(sedeFilter != ''  && sedeFilter != row['sede'])
-        return 0;
-    if(nombreFilter != '' && nombreFilter != row['nombre'])
-        return 0;
+    if(index == 'especialidad')
+        hasEspecialidad = 1;
     return 1;
 }
