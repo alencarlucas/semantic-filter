@@ -10,7 +10,8 @@
   width: 100%;
 }
 
-.container {
-    width: 1570px;
-    margin: 50px auto;
+.grid {
+    margin: auto!important;
+    width: 90%;
+    text-align: center;
 }
