@@ -47,6 +47,8 @@ function search(){
 
 //Testa aderência aos filtros
 function execFilter(index, value) {
+    if(index == 'hidden')
+        return 1;
     if(index == 'especialidad' && hasEspecialidad == 1)
         return 1;
     if (filter[index] != '' && filter[index].toLowerCase() != value.toLowerCase())
