@@ -13,37 +13,29 @@
 <div class="container">
   <div class="ui grid">
     <div class="four wide">
-      <div id="sector" class="ui selection dropdown">
-        <input type="hidden" name="gender">
-        <i class="dropdown icon"></i>
-        <div class="default text">Sector</div>
-        <div class="menu">
-          <div class="item" data-value="1">Valencia</div>
-          <div class="item" data-value="0">Zaragosa</div>
-        </div>
-      </div>
+      <select id="sector" class="ui fluid dropdown">
+        <option value="">Sector</option>
+        <option value="valencia">Valencia</option>
+        <option value="Zaragosa">Zaragosa</option>
+      </select>
     </div>
     <div class="four wide">
       <select id="especialidad" multiple="" class="ui fluid dropdown">
         <option value="">Especialidad</option>
-        <option value="angular">Derecho Mercantil</option>
-        <option value="css">Derecho de la competencia</option>
-        <option value="design">Derecho societario</option>
-        <option value="ember">Derecho Igualitario</option>
-        <option value="html">Derecho de prueba</option>
-        <option value="ia">Internet</option>
+        <option value="Derecho Mercantil">Derecho Mercantil</option>
+        <option value="Derecho de la competencia">Derecho de la competencia</option>
+        <option value="Derecho societario">Derecho societario</option>
+        <option value="Derecho Igualitario">Derecho Igualitario</option>
+        <option value="Derecho de prueba">Derecho de prueba</option>
+        <option value="Internet">Internet</option>
       </select>
     </div>
     <div class="four wide">
-      <div id="sede" class="ui selection dropdown">
-        <input type="hidden" name="gender">
-        <i class="dropdown icon"></i>
-        <div class="default text">Sede</div>
-        <div class="menu">
-          <div class="item" data-value="1">Somewhere</div>
-          <div class="item" data-value="0">Somewhere</div>
-        </div>
-      </div>
+      <select id="sede" class="ui fluid dropdown">
+        <option value="">Sede</option>
+        <option value="Valencia">Valencia</option>
+        <option value="Zaragosa">Zaragosa</option>
+      </select>
     </div>
     <div class="four wide">
       <div class="ui input">
