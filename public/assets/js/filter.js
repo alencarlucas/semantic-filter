@@ -27,7 +27,7 @@ $(function() {
 
 /*
     Testa os filtros para cada entrada de dados e se encontrou a referência
-    apresenta o nome no console
+    apresenta o elemento
 */
 function search(){
     $('.equipo-list-member').each(function() {
@@ -45,7 +45,7 @@ function search(){
             Se os filtros estão aderentes a todos os parâmetros mostra o elemento
             no html, caso contrário esconde
         */
-        if(show){
+        if(show*hasEspecialidad){
             $(this).show();
         }
         else{
@@ -68,7 +68,11 @@ function execFilter(index, value) {
     */
     if(index != 'nombre'){
         if (filter[index] != '' && filter[index].toLowerCase() != value.toLowerCase())
-            return 0;
+            // Para especialidad sempre retorna 1; controle por flag
+            if(index != 'especialidad')
+                return 0;
+            else
+                return 1;
     }
     else{
         if (filter[index] != '' && value.toLowerCase().indexOf(filter[index].toLowerCase()) < 0)
