@@ -1,8 +1,10 @@
-//Variáveis para armazenar os dados dos filtros
+/*
+    0: NÃO contém a especialidade
+    1: contém especialidade
+*/
 var hasEspecialidad = 0;
-var $data;
 
-//Array de objects utilizado apenas para testes
+//Array utilizado para armazenar os valores dos filtros
 var filter = {'sector' : '', 'sede' : '', 'especialidad' : '', 'sector' : ''};
 
 //Inicializa os dropdowns
@@ -19,7 +21,6 @@ $(function() {
         filter['especialidad'] = $('#especialidad').val();
         filter['nombre'] = $('#nombre').val();
         filter['sede'] = $('#sede').val();
-        $data = $('.equipo-list-member');
         search();
     });
 });
@@ -29,30 +30,51 @@ $(function() {
     apresenta o nome no console
 */
 function search(){
-    for(var i = 0; i < $data.length; i++){
+    $('.equipo-list-member').each(function() {
         var show = 1;
         hasEspecialidad = 0;
-        for(var k = 1; k < $data[i].attributes.length; k++ ){
-            show *= execFilter($data[i].attributes[k].localName.replace(/[^A-Za-z]/g, ''), $data[i].attributes[k].nodeValue);
+        for(var k = 1; k < $(this)[0].attributes.length; k++ ){
+            /*
+                Chama a função que testa os filtros para cada atributo, removendo
+                números e caracteres especiais do nome do atributo ex:
+                    especialidad_1 é passado com especialidad apenas
+            */
+            show *= execFilter($(this)[0].attributes[k].localName.replace(/[^A-Za-z]/g, ''), $(this)[0].attributes[k].nodeValue);
         }
+        /*
+            Se os filtros estão aderentes a todos os parâmetros mostra o elemento
+            no html, caso contrário esconde
+        */
         if(show){
-            console.log($data[i].attributes[$data[i].attributes.length - 1].nodeValue);
-            $data[i].hidden = false;
+            $(this).show();
         }
         else{
-            $data[i].hidden = true;
+            $(this).hide();
         }
-    }
+    });
 }
 
 //Testa aderência aos filtros
 function execFilter(index, value) {
-    if(index == 'hidden')
+    // Testa se os parâmetros são relevantes
+    if(index != 'especialidad' && index != 'sector' && index != 'nombre' && index != 'sede')
         return 1;
+    // Se já foi verificado que existe a especialidade não testa de novo
     if(index == 'especialidad' && hasEspecialidad == 1)
         return 1;
-    if (filter[index] != '' && filter[index].toLowerCase() != value.toLowerCase())
-        return 0;
+    /*
+        Condição que testa igualdade para todos os parâmetros, mas para nombre
+        testa se está contido (igualdade parcial)
+    */
+    if(index != 'nombre'){
+        if (filter[index] != '' && filter[index].toLowerCase() != value.toLowerCase())
+            return 0;
+    }
+    else{
+        if (filter[index] != '' && value.toLowerCase().indexOf(filter[index].toLowerCase()) < 0)
+            return 0;
+    }
+    // Se encontrou especialidade ativa a flag
     if(index == 'especialidad')
         hasEspecialidad = 1;
     return 1;
